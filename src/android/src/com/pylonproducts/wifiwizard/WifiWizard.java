@@ -141,7 +141,7 @@ public class WifiWizard extends CordovaPlugin {
                 wifi.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK);
                 wifi.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.TKIP);
                 wifi.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.CCMP);
-                //wifi.allowedProtocols.set(WifiConfiguration.Protocol.WPA); // WPA
+                wifi.allowedProtocols.set(WifiConfiguration.Protocol.WPA); // WPA
                 wifi.allowedProtocols.set(WifiConfiguration.Protocol.RSN); // WPA2
 
                 wifi.networkId = ssidToNetworkId(newSSID);
