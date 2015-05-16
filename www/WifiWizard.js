@@ -42,6 +42,12 @@ var WifiWizard = {
                 password : WifiWizard.formatWifiString(password)
                 // Other parameters can be added depending on algorithm.
             };
+        } else if (algorithm === 'WEP') {
+            wifiConfig.auth = {
+                algorithm : algorithm,
+                password : WifiWizard.formatWifiString(password)
+                // Other parameters can be added depending on algorithm.
+            };
         }
         else if (algorithm === 'New network type') {
             wifiConfig.auth = {
