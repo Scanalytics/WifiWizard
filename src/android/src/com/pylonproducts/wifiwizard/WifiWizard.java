@@ -135,12 +135,14 @@ public class WifiWizard extends CordovaPlugin {
                 wifi.preSharedKey = newPass;
 
                 wifi.status = WifiConfiguration.Status.ENABLED;
+                wifi.allowedAuthAlgorithms.set(WifiConfiguration.AuthAlgorithm.OPEN);
                 wifi.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.TKIP);
                 wifi.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.CCMP);
                 wifi.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK);
                 wifi.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.TKIP);
                 wifi.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.CCMP);
-                wifi.allowedProtocols.set(WifiConfiguration.Protocol.RSN);
+                //wifi.allowedProtocols.set(WifiConfiguration.Protocol.WPA); // WPA
+                wifi.allowedProtocols.set(WifiConfiguration.Protocol.RSN); // WPA2
 
                 wifi.networkId = ssidToNetworkId(newSSID);
 
@@ -170,10 +172,11 @@ public class WifiWizard extends CordovaPlugin {
                 wifi.wepTxKeyIndex = 0;
 
                 wifi.status = WifiConfiguration.Status.ENABLED;
-                wifi.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
                 wifi.allowedAuthAlgorithms.set(WifiConfiguration.AuthAlgorithm.SHARED);
                 wifi.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP40);
                 wifi.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP104);
+                wifi.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
+                
 
                 wifi.networkId = ssidToNetworkId(newSSID);
 
