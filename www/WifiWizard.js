@@ -128,7 +128,11 @@ var WifiWizard = {
             switch (wifi.auth.algorithm) {
                 case 'WPA':
                     networkInformation.push('WPA');
-                networkInformation.push(wifi.auth.password);
+                    networkInformation.push(wifi.auth.password);
+                break;
+                case 'WEP':
+                    networkInformation.push('WEP');
+                    networkInformation.push(wifi.auth.password);
                 break;
                 case 'NONE':
                     networkInformation.push('NONE');
