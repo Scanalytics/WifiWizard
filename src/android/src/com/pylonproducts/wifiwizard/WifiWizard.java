@@ -157,10 +157,37 @@ public class WifiWizard extends CordovaPlugin {
                 return true;
             }
             else if (authType.equals("WEP")) {
-                // TODO: connect/configure for WEP
-                Log.d(TAG, "WEP unsupported.");
-                callbackContext.error("WEP unsupported");
-                return false;
+                // WEP Data format:
+                // 0: ssid
+                // 1: auth
+                // 2: password
+
+                String newSSID = data.getString(0);
+                wifi.SSID = newSSID;
+                String newPass = data.getString(2);
+                //wifi.preSharedKey = newPass;
+                wifi.wepKeys[0] = newPass;
+                wifi.wepTxKeyIndex = 0;
+
+                wifi.status = WifiConfiguration.Status.ENABLED;
+                wifi.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
+                wifi.allowedAuthAlgorithms.set(WifiConfiguration.AuthAlgorithm.SHARED);
+                wifi.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP40);
+                wifi.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP104);
+
+                wifi.networkId = ssidToNetworkId(newSSID);
+
+                if ( wifi.networkId == -1 ) {
+                    wifiManager.addNetwork(wifi);
+                    callbackContext.success(newSSID + " successfully added.");
+                }
+                else {
+                    wifiManager.updateNetwork(wifi);
+                    callbackContext.success(newSSID + " successfully updated.");
+                }
+
+                wifiManager.saveConfiguration();
+                return true;
             }
             else if (authType.equals("NONE")) {
                 String newSSID = data.getString(0);
